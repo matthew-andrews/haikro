@@ -34,5 +34,4 @@ deploy:
 		--app $(app) \
 		--token $(HEROKU_AUTH_TOKEN) \
 		--commit `git rev-parse HEAD` \
-		--entry "server.js"
 ```

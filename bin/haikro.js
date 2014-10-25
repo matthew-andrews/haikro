@@ -17,7 +17,7 @@ if (argv._.indexOf('deploy') !== -1) {
 	promise = promise.then(function() {
 		return deploy({
 			app: argv.app,
-			entry: argv.entry || 'app.js',
+			entry: argv.entry,
 			commit: argv.commit,
 			project: argv.project || process.cwd(),
 			token: argv.token || process.env.HEROKU_AUTH_TOKEN
