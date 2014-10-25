@@ -3,6 +3,16 @@ haikro
 
 A tool to make + deploy node apps as self contained tarballs to Heroku
 
+## Installation
+
+```sh
+npm install --save haikro
+```
+
+I currently recommend installing **haikro** as a normal dependency instead of a `devDependency` even though strictly speaking it shouldn't be used in production to stop it being deleted by `npm prune --production`.
+
+## Usage
+
 Example Makefile:-
 
 ```sh
