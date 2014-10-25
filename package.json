@@ -8,6 +8,7 @@
     "denodeify": "^1.1.2",
     "es6-promise": "^2.0.0",
     "minimist": "^1.1.0",
-    "request": "^2.46.0"
+    "request": "^2.46.0",
+    "winston": "^0.8.1"
   }
 }
