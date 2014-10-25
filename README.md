@@ -13,7 +13,7 @@ I currently recommend installing **haikro** as a normal dependency instead of a 
 
 ## Usage
 
-Example Makefile:-
+Example `Makefile`:-
 
 ```sh
 app := my-deplorable-app
@@ -34,4 +34,10 @@ deploy:
 		--app $(app) \
 		--token $(HEROKU_AUTH_TOKEN) \
 		--commit `git rev-parse HEAD` \
+```
+
+Example `Procfile`:-
+
+```
+web: server/app.js
 ```
