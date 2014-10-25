@@ -41,3 +41,8 @@ Example `Procfile`:-
 ```
 web: server/app.js
 ```
+
+## CLI Options
+
+`--verbose` - displays lot of debug info
+`--silent` - display no debug info
