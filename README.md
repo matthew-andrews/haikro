@@ -33,7 +33,7 @@ deploy:
 	@./node_modules/.bin/haikro build deploy \
 		--app $(app) \
 		--token $(HEROKU_AUTH_TOKEN) \
-		--commit `git rev-parse HEAD` \
+		--commit `git rev-parse HEAD`
 ```
 
 Example `Procfile`:-
