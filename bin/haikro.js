@@ -26,7 +26,7 @@ var exec = denodeify(require('child_process').exec);
 
 function getHerokuAuthToken() {
 	var token = argv.token;
-	if (token) return token;
+	if (token) return Promise.resolve(token);
 	logger.verbose("token argument not passed, using heroku cli instead");
 	return exec("(echo -n \":\" ; heroku auth:token) | base64");
 }
