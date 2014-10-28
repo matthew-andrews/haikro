@@ -51,7 +51,7 @@ language: node_js
 node_js:
 - '0.10'
 after_success:
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && make deploy-without-clean-and-install
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && make deploy
 ```
 
 ## CLI Options
