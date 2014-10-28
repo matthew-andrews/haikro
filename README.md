@@ -42,6 +42,18 @@ Example `Procfile`:-
 web: server/app.js
 ```
 
+Example `.travis.yml` [also tested with codeshop.io]
+
+```yaml
+script:
+- npm test
+language: node_js
+node_js:
+- '0.10'
+after_success:
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && make deploy-without-clean-and-install
+```
+
 ## CLI Options
 
 - `--verbose` - displays lot of debug info
