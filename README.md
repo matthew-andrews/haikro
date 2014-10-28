@@ -42,7 +42,7 @@ Example `Procfile`:-
 web: server/app.js
 ```
 
-Example `.travis.yml` — also tested with [codeshop.io](https://codeship.io)
+Example `.travis.yml` — also tested with [codeshop.io](https://codeship.io):-
 
 ```yaml
 script:
