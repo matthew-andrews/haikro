@@ -24,25 +24,15 @@ if (argv._.indexOf('build') !== -1) {
 var denodeify = require('denodeify');
 var exec = denodeify(require('child_process').exec);
 
-function getHerokuAuthToken() {
-	var token = argv.token;
-	if (token) return Promise.resolve(token);
-	logger.verbose("token argument not passed, using heroku cli instead");
-	return exec("(echo -n \":\" ; heroku auth:token) | base64");
-}
-
 if (argv._.indexOf('deploy') !== -1) {
 	logger.verbose("will deploy");
 	var deploy = require('../lib/deploy');
-	promise = getHerokuAuthToken()
-		.then(function(token) {
-			return deploy({
-				app: argv.app,
-				commit: argv.commit,
-				project: argv.project || process.cwd(),
-				token: token
-			});
-		});
+	return deploy({
+		app: argv.app,
+		commit: argv.commit,
+		project: argv.project || process.cwd(),
+		token: argv.token
+	});
 }
 
 promise.then(function() {
