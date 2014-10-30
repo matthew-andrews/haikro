@@ -28,7 +28,7 @@ if (argv._.indexOf('deploy') !== -1) {
 	logger.verbose("will deploy");
 	var deploy = require('../lib/deploy');
 	promise = promise.then(function() {
-		deploy({
+		return deploy({
 			app: argv.app,
 			commit: argv.commit,
 			project: argv.project || process.cwd(),
