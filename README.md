@@ -36,7 +36,10 @@ deploy:
 		--commit `git rev-parse HEAD`
 ```
 
-Where `HEROKU_AUTH_TOKEN` is `(echo -n ":" ; heroku auth:token) | base64`
+Where `HEROKU_AUTH_TOKEN` is:
+```sh
+(echo -n ":" ; heroku auth:token) | base64
+```
 
 Example `Procfile`:-
 
