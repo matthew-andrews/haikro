@@ -38,7 +38,7 @@ deploy:
 
 Where `HEROKU_AUTH_TOKEN` is:
 ```sh
-(echo -n ":" ; heroku auth:token) | base64
+heroku auth:token
 ```
 
 Example `Procfile`:-
