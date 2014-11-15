@@ -1,7 +1,7 @@
 haikro
 ======
 
-A tool to make + deploy node apps as self contained tarballs to Heroku
+A tool to make + deploy node apps as self contained tarballs to Heroku.
 
 ## Installation
 
