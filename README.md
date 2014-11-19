@@ -47,7 +47,7 @@ Example `Procfile`:-
 web: server/app.js
 ```
 
-Example `.travis.yml` — also tested with [codeship.io](https://codeship.io):-
+Example `.travis.yml`
 
 ```yaml
 script:
@@ -58,6 +58,8 @@ node_js:
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && make deploy
 ```
+
+Note: Haikro is also tested with [codeship.io](https://codeship.io).
 
 ## CLI Options
 
