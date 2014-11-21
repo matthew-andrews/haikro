@@ -25,6 +25,10 @@ var denodeify = require('denodeify');
 var exec = denodeify(require('child_process').exec);
 
 if (argv._.indexOf('deploy') !== -1) {
+	if (argv.token) {
+		logger.warn("--token is deprecated, use --heroku-token");
+		argv['heroku-token'] = argv.token;
+	}
 	logger.verbose("will deploy");
 	var deploy = require('../lib/deploy');
 	promise = promise.then(function() {
@@ -32,7 +36,7 @@ if (argv._.indexOf('deploy') !== -1) {
 			app: argv.app,
 			commit: argv.commit,
 			project: argv.project || process.cwd(),
-			token: argv.token
+			token: argv['heroku-token']
 		});
 	});
 }
