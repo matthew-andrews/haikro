@@ -21,8 +21,18 @@ if (argv._.indexOf('build') !== -1) {
 	});
 }
 
-var denodeify = require('denodeify');
-var exec = denodeify(require('child_process').exec);
+if (argv._.indexOf('release') !== -1) {
+	logger.verbose("will release");
+	var release = require('../lib/release');
+	promise = promise.then(function() {
+		return release({
+			project: argv.project,
+			token: argv['github-token'],
+			repository: argv.repository,
+			tag: argv.tag
+		});
+	});
+}
 
 if (argv._.indexOf('deploy') !== -1) {
 	if (argv.token) {
