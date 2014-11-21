@@ -63,5 +63,8 @@ Note: Haikro is also tested with [codeship.io](https://codeship.io).
 
 ## CLI Options
 
-- `--verbose` - displays lot of debug info
+- `--app` - Heroku app name
+- `--commit` - free text used to identify a release
+- `--heroku-token` - Heroku auth token
 - `--silent` - displays no debug info
+- `--verbose` - displays lot of debug info
