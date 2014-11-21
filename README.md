@@ -26,7 +26,7 @@ deploy:
 	# Build steps
 	sass styles.scss public/styles.css
 	
-	# Pre-deploy clean
+	# Remove devDependencies
 	npm prune --production
 
 	# Package+deploy
