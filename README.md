@@ -63,10 +63,10 @@ Example of `package.json`
 
 ```json
 {
-  'name': 'My app',
-  'version': '1.0.0',
-  'engines': {
-    'node': '0.10.x'
+  "name": "My app",
+  "version": "1.0.0",
+  "engines": {
+    "node": "0.10.x"
   }
 }
 ```
