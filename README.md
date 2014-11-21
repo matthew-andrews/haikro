@@ -59,6 +59,18 @@ after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && make deploy
 ```
 
+Example of `package.json`
+
+```json
+{
+  'name': 'My app',
+  'version': '1.0.0',
+  'engines': {
+    'node': '0.10.x'
+  }
+}
+```
+
 Note: Haikro is also tested with [codeship.io](https://codeship.io).
 
 ## CLI Options
