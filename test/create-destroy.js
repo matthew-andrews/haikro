@@ -13,12 +13,18 @@ logger.setLevel('debug');
 var create = require('../lib/create');
 var destroy = require('../lib/destroy');
 
+function promiseToWait(seconds) {
+	return function() {
+		return new Promise(function(resolve, reject) { setTimeout(resolve, seconds * 1000); });
+	}
+}
+
 describe('create and destroy', function() {
 	it('can create and delete an app', function(done) {
 		this.timeout(60 * 1000);
 		var app, token;
-		// todo swap to default to environment variable
-		exec('heroku auth:token')
+
+		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
 				token = result;
 				return create({ token: token });
@@ -26,11 +32,7 @@ describe('create and destroy', function() {
 			.then(function(name) { app = name; })
 
 			// HACK - Give Heroku a second or two to sort itself out
-			.then(function() {
-				return new Promise(function(resolve, reject) {
-					setTimeout(resolve, 2000);
-				});
-			})
+			.then(promiseToWait(2))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
@@ -47,7 +49,7 @@ describe('create and destroy', function() {
 					app: app
 				});
 			})
-			.then(function() { done(); })
+			.then(done.bind(this, null))
 			.catch(done);
 	});
 });
