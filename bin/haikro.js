@@ -80,4 +80,5 @@ promise.then(function() {
 	logger.verbose("haikro out");
 }, function(err) {
 	logger.error(err.message);
+	process.exit(1);
 });
