@@ -13,6 +13,19 @@ if (argv.silent) {
 	logger.setLevel('silent');
 }
 
+if (argv._.indexOf('create') !== -1) {
+	logger.verbose("will create");
+	var create = require('../lib/create');
+	promise = promise.then(function() {
+		return create({
+			token: argv['heroku-token'],
+			app: argv.app
+		});
+	}).then(function(app) {
+		argv.app = app;
+	});
+}
+
 if (argv._.indexOf('build') !== -1) {
 	logger.verbose("will build");
 	var build = require('../lib/build');
@@ -47,6 +60,17 @@ if (argv._.indexOf('deploy') !== -1) {
 			commit: argv.commit,
 			project: argv.project || process.cwd(),
 			token: argv['heroku-token']
+		});
+	});
+}
+
+if (argv._.indexOf('destroy') !== -1) {
+	logger.verbose("will destroy");
+	var destroy = require('../lib/destroy');
+	promise = promise.then(function() {
+		return destroy({
+			token: argv['heroku-token'],
+			app: argv.app
 		});
 	});
 }
