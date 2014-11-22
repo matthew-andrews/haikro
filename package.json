@@ -4,11 +4,17 @@
   "bin": {
     "haikro": "bin/haikro.js"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "denodeify": "^1.1.2",
     "es6-promise": "^2.0.0",
     "isomorphic-fetch": "^1.0.0",
     "minimist": "^1.1.0",
     "winston": "^0.8.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1"
   }
 }
