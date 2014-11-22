@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 'use strict';
-
 require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 var argv = require('minimist')(process.argv.slice(2));
 var logger = require('../lib/logger');
 var promise = Promise.resolve();
