@@ -13,6 +13,17 @@ if (argv.silent) {
 	logger.setLevel('silent');
 }
 
+if (argv._.indexOf('create') !== -1) {
+	logger.verbose("will create");
+	var create = require('../lib/create');
+	promise = promise.then(function() {
+		return create({
+			token: argv['heroku-token'],
+			app: argv.app
+		});
+	});
+}
+
 if (argv._.indexOf('build') !== -1) {
 	logger.verbose("will build");
 	var build = require('../lib/build');
