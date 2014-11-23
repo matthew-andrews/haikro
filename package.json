@@ -1,6 +1,6 @@
 {
   "name": "haikro",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "bin": {
     "haikro": "bin/haikro.js"
   },
