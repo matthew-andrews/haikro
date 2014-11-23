@@ -3,3 +3,5 @@
 /test/simple-app/tmp
 /test/even-simpler-app/node-*
 /test/even-simpler-app/tmp
+/test/run-things-in-bin/node-*
+/test/run-things-in-bin/tmp
