@@ -20,7 +20,7 @@ var deploy = require('../lib/deploy');
 
 describe('simple deployment', function() {
 	it('can create, deploy and delete an app', function(done) {
-		this.timeout(60 * 1000);
+		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/simple-app';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
@@ -41,7 +41,7 @@ describe('simple deployment', function() {
 			})
 
 			// HACK - Give Heroku a second or two to sort itself out
-			.then(promiseToWait(2))
+			.then(promiseToWait(4))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
