@@ -1,3 +1,5 @@
 /node_modules/
 /test/simple-app/node-*
 /test/simple-app/tmp
+/test/even-simpler-app/node-*
+/test/even-simpler-app/tmp
