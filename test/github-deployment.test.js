@@ -63,4 +63,3 @@ describe('github deployment', function() {
 			.catch(done);
 	});
 });
-

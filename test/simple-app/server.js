@@ -1,3 +1,4 @@
+'use strict';
 require('http').createServer(function (req, res) {
 	res.writeHead(200, {'Content-Type': 'text/plain'});
 	res.end("Probably the simplest webserver in the world");

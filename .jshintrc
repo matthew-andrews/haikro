@@ -1,0 +1,6 @@
+{
+  "laxbreak": true,
+  "node": true,
+  "browser": true,
+  "predef": ["fetch", "it", "describe"]
+}

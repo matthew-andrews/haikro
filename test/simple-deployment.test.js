@@ -62,4 +62,3 @@ describe('simple deployment', function() {
 			.catch(done);
 	});
 });
-

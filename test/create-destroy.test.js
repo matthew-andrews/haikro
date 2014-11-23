@@ -1,7 +1,7 @@
 'use strict';
 
 // Test stuff
-var assert = require("assert")
+var assert = require("assert");
 
 // Promise stuff
 require('es6-promise').polyfill();

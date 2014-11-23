@@ -5,7 +5,10 @@
     "haikro": "bin/haikro.js"
   },
   "scripts": {
-    "test": "mocha test/*.test.js"
+    "jshint": "jshint `npm run -s js-files`",
+    "lintspaces": "lintspaces -i js-comments -e .editorconfig `npm run -s js-files`",
+    "js-files": "find . -name '*.js' ! -path './node_modules/*'",
+    "test": "npm run jshint && npm run lintspaces && mocha test/*.test.js"
   },
   "dependencies": {
     "denodeify": "^1.1.2",
@@ -15,6 +18,8 @@
     "winston": "^0.8.1"
   },
   "devDependencies": {
+    "jshint": "^2.5.10",
+    "lintspaces-cli": "0.0.4",
     "mocha": "^2.0.1"
   }
 }
