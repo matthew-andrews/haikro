@@ -71,7 +71,6 @@ if (argv._.indexOf('gh-deploy') !== -1) {
 	promise = promise.then(function() {
 		return ghDeploy({
 			app: argv.app,
-			commit: argv.commit,
 			tag: argv.tag,
 			token: argv['heroku-token'],
 			repository: argv.repository
