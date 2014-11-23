@@ -1,1 +1,3 @@
 /node_modules/
+/test/simple-app/node-*
+/test/simple-app/tmp
