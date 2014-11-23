@@ -5,7 +5,7 @@
     "haikro": "bin/haikro.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/*.test.js"
   },
   "dependencies": {
     "denodeify": "^1.1.2",
