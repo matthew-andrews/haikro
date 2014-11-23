@@ -60,7 +60,8 @@ if (argv._.indexOf('deploy') !== -1) {
 			app: argv.app,
 			commit: argv.commit,
 			project: argv.project || process.cwd(),
-			token: argv['heroku-token']
+			token: argv['heroku-token'],
+			useLegacyToken: !!argv.token
 		});
 	});
 }
