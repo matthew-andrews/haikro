@@ -15,34 +15,33 @@ var logger = require('../lib/logger');
 logger.setLevel('debug');
 var create = require('../lib/create');
 var destroy = require('../lib/destroy');
-var ghDeploy = require('../lib/gh-deploy');
+var build = require('../lib/build');
+var deploy = require('../lib/deploy');
 
-describe('github deployment', function() {
-	it('can create, deploy and delete an app [warning: can take over 20s]', function(done) {
-		this.timeout(60 * 1000);
+describe('simple deployment', function() {
+	it('can create, deploy and delete an app that runs from inside node_modules/.bin', function(done) {
+		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/run-things-in-bin';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
 				token = result;
+				return build(project);
 			})
 			.then(function() {
 				return create({ token: token });
 			})
 			.then(function(name) { app = name; })
 			.then(function() {
-				return ghDeploy({
+				return deploy({
 					app: app,
-					tag: 'v1.0.4',
 					token: token,
-					project: project,
-					repository: 'matthew-andrews/haikro-simple-app'
+					project: project
 				});
 			})
-			.then(function() { logger.warn("going to sleep for 10 seconds"); })
 
-			// HACK - Give Heroku a few seconds to sort itself out
-			.then(promiseToWait(10))
+			// HACK - Give Heroku a second or two to sort itself out
+			.then(promiseToWait(4))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
@@ -51,7 +50,7 @@ describe('github deployment', function() {
 				return response.text();
 			})
 			.then(function(body) {
-				assert(/the simplest webserver in the world/.test(body));
+				assert(/the simplest webserver in the bin/.test(body));
 			})
 			.then(function() {
 				return destroy({
