@@ -65,6 +65,19 @@ if (argv._.indexOf('deploy') !== -1) {
 	});
 }
 
+if (argv._.indexOf('gh-deploy') !== -1) {
+	logger.verbose("will gh-deploy");
+	var ghDeploy = require('../lib/gh-deploy');
+	promise = promise.then(function() {
+		return ghDeploy({
+			app: argv.app,
+			tag: argv.tag,
+			token: argv['heroku-token'],
+			repository: argv.repository
+		});
+	});
+}
+
 if (argv._.indexOf('destroy') !== -1) {
 	logger.verbose("will destroy");
 	var destroy = require('../lib/destroy');
