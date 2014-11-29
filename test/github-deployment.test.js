@@ -39,10 +39,10 @@ describe('github deployment', function() {
 					repository: 'matthew-andrews/haikro-simple-app'
 				});
 			})
-			.then(function() { logger.warn("going to sleep for 10 seconds"); })
+			.then(function() { logger.warn("going to sleep for 15 seconds"); })
 
 			// HACK - Give Heroku a few seconds to sort itself out
-			.then(promiseToWait(10))
+			.then(promiseToWait(15))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
