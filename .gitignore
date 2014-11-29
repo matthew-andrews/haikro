@@ -5,3 +5,5 @@
 /test/even-simpler-app/tmp
 /test/run-things-in-bin/node-*
 /test/run-things-in-bin/tmp
+/test/npm-start/node-*
+/test/npm-start/tmp
