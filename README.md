@@ -1,7 +1,7 @@
 haikro [![Build Status](https://travis-ci.org/matthew-andrews/haikro.svg?branch=test)](https://travis-ci.org/matthew-andrews/haikro)
 ======
 
-A tool to make + deploy node apps as self contained tarballs to Heroku.
+A tool to make + deploy node apps as self contained tarballs to Heroku.  [Read the explainer on my blog.](https://mattandre.ws/2014/11/haikro-heroku-deloys-node-js/)
 
 ## Installation
 
