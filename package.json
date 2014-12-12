@@ -4,6 +4,10 @@
   "bin": {
     "haikro": "bin/haikro.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthew-andrews/haikro.git"
+  },
   "scripts": {
     "jshint": "jshint `npm run -s js-files`",
     "lintspaces": "lintspaces -i js-comments -e .editorconfig `npm run -s js-files`",
