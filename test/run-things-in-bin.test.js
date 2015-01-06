@@ -26,7 +26,7 @@ describe('simple deployment', function() {
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
 				token = result;
-				return build(project);
+				return build({ project: project });
 			})
 			.then(function() {
 				return create({ token: token });

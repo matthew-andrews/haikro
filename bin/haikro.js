@@ -31,7 +31,10 @@ if (argv._.indexOf('build') !== -1) {
 	logger.verbose("will build");
 	var build = require('../lib/build');
 	promise = promise.then(function() {
-		return build(argv.project);
+		return build({
+			project: argv.project,
+			strict: argv.strict
+		});
 	});
 }
 
