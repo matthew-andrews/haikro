@@ -21,7 +21,7 @@ var deploy = require('../lib/deploy');
 describe('simple deployment', function() {
 	it('can run apps without Procfiles, falling back to npm start instead', function(done) {
 		this.timeout(120 * 1000);
-		var app, token, project = __dirname + '/npm-start';
+		var app, token, project = __dirname + '/fixtures/npm-start';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {

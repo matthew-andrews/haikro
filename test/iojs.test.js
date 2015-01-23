@@ -21,7 +21,7 @@ var deploy = require('../lib/deploy');
 describe('simple deployment', function() {
 	it('can create, deploy and delete an app', function(done) {
 		this.timeout(120 * 1000);
-		var app, token, project = __dirname + '/fixtures/simple-app';
+		var app, token, project = __dirname + '/fixtures/iojs';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {

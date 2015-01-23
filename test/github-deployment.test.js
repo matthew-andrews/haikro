@@ -20,7 +20,7 @@ var ghDeploy = require('../lib/gh-deploy');
 describe('github deployment', function() {
 	it('can create, deploy and delete an app [warning: can take over 20s]', function(done) {
 		this.timeout(60 * 1000);
-		var app, token, project = __dirname + '/simple-app';
+		var app, token, project = __dirname + '/fixtures/simple-app';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
