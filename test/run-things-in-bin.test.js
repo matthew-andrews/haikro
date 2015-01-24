@@ -21,7 +21,7 @@ var deploy = require('../lib/deploy');
 describe('simple deployment', function() {
 	it('can create, deploy and delete an app that runs from inside node_modules/.bin', function(done) {
 		this.timeout(120 * 1000);
-		var app, token, project = __dirname + '/run-things-in-bin';
+		var app, token, project = __dirname + '/fixtures/run-things-in-bin';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
