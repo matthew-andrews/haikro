@@ -19,7 +19,7 @@ var ghDeploy = require('../lib/gh-deploy');
 
 describe('github deployment', function() {
 	it('can create, deploy and delete an app [warning: can take over 20s]', function(done) {
-		this.timeout(120 * 1000);
+		this.timeout(240 * 1000);
 		var app, token, project = __dirname + '/fixtures/simple-app';
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
@@ -39,10 +39,10 @@ describe('github deployment', function() {
 					repository: 'matthew-andrews/haikro-simple-app'
 				});
 			})
-			.then(function() { logger.warn("going to sleep for 15 seconds"); })
+			.then(function() { logger.warn("going to sleep for 60 seconds"); })
 
 			// HACK - Give Heroku a few seconds to sort itself out
-			.then(promiseToWait(15))
+			.then(promiseToWait(60))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
