@@ -73,6 +73,18 @@ Example of `package.json`
 
 Note: Haikro is also tested with [codeship.io](https://codeship.io).
 
+If you want to use **iojs** just change your `package.json`'s `engines` to:-
+
+```json
+{
+  "name": "My app",
+  "version": "1.0.0",
+  "engines": {
+    "iojs": "^1.0.3"
+  }
+}
+```
+
 ## CLI Options
 
 - `--app` - Heroku app name
