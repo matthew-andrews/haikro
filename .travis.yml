@@ -1,3 +1,14 @@
 language: node_js
 node_js:
 - '0.10'
+before_deploy:
+- npm-prepublish --verbose
+deploy:
+  provider: npm
+  email: matt@mattandre.ws
+  api_key:
+    secure: KjjWDVRZLZiJefyqtMHazA9Lci/iz6KY1iJHqC5EGdVx6+jzlfTLx8+fhNcKoCAj/Bg6bpQiYsuUoBmKfkLflUPdueiBHbjWe0CeggE3nZ6+G4TzJe6tgAx3vi7bYgkZNpnALZuOtcas85hQbYJR5zedeThN94KwAliGaCXYFBk=
+  on:
+    all_branches: true
+    tags: true
+    repo: matthew-andrews/haikro
