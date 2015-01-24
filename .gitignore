@@ -7,3 +7,5 @@
 /test/fixtures/run-things-in-bin/tmp
 /test/fixtures/npm-start/node-*
 /test/fixtures/npm-start/tmp
+/test/fixtures/iojs/iojs-*
+/test/fixtures/iojs/tmp
