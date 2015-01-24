@@ -1,11 +1,11 @@
 /node_modules/
 /test/fixtures/simple-app/node-*
-/test/fixtures/simple-app/tmp
+/test/fixtures/simple-app/.haikro-cache
 /test/fixtures/even-simpler-app/node-*
-/test/fixtures/even-simpler-app/tmp
+/test/fixtures/even-simpler-app/.haikro-cache
 /test/fixtures/run-things-in-bin/node-*
-/test/fixtures/run-things-in-bin/tmp
+/test/fixtures/run-things-in-bin/.haikro-cache
 /test/fixtures/npm-start/node-*
-/test/fixtures/npm-start/tmp
+/test/fixtures/npm-start/.haikro-cache
 /test/fixtures/iojs/iojs-*
-/test/fixtures/iojs/tmp
+/test/fixtures/iojs/.haikro-cache
