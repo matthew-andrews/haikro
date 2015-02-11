@@ -20,7 +20,9 @@ if (argv._.indexOf('create') !== -1) {
 	promise = promise.then(function() {
 		return create({
 			token: argv['heroku-token'],
-			app: argv.app
+			app: argv.app,
+			region: argv.region,
+			organization: argv.organization
 		});
 	}).then(function(app) {
 		argv.app = app;
