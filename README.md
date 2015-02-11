@@ -88,6 +88,8 @@ If you want to use **iojs** just change your `package.json`'s `engines` to:-
 ## CLI Options
 
 - `--app` - Heroku app name
+- `--region` - Which region to create app in (when used with `haikro create`)
+- `--organization` - Which organization to create app in (when used with `haikro create`)
 - `--commit` - free text used to identify a release
 - `--heroku-token` - Heroku auth token
 - `--silent` - displays no debug info
