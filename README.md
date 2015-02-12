@@ -27,7 +27,7 @@ deploy:
 	sass styles.scss public/styles.css
 	
 	# Package+deploy
-	@./node_modules/.bin/haikro build deploy \
+	@haikro build deploy \
 		--app $(app) \
 		--heroku-token $(HEROKU_AUTH_TOKEN) \
 		--commit `git rev-parse HEAD`
