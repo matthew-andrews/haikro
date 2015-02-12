@@ -51,6 +51,8 @@ describe('simple deployment', function() {
 			})
 			.then(function(body) {
 				assert(/the simplest webserver in the world/.test(body));
+				assert(/dep:this file should be here/.test(body));
+				assert(/devDep:this file wasn't here/.test(body));
 			})
 			.then(function() {
 				return destroy({

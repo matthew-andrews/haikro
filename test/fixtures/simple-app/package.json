@@ -1,1 +1,8 @@
-{}
+{
+  "dependencies": {
+    "dep-test": "*"
+  },
+  "devDependencies": {
+    "dev-dep-test": "*"
+  }
+}
