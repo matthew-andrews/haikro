@@ -1,7 +1,7 @@
 'use strict';
 var fs = require('fs');
 var dep = "this file wasn't here\n";
-var devDep = "this file wasn't here\o";
+var devDep = "this file wasn't here\n";
 try { dep = fs.readFileSync('./node_modules/dep-test/test.txt'); } catch(e) { }
 try { devDep = fs.readFileSync('./node_modules/dev-dep-test/test.txt'); } catch(e) { }
 
