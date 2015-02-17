@@ -28,6 +28,7 @@ deploy:
 	
 	# Package+deploy
 	@haikro build deploy \
+	    --prune \
 		--app $(app) \
 		--heroku-token $(HEROKU_AUTH_TOKEN) \
 		--commit `git rev-parse HEAD`
@@ -91,6 +92,7 @@ If you want to use **iojs** just change your `package.json`'s `engines` to:-
 - `--heroku-token` - Heroku auth token
 - `--silent` - displays no debug info
 - `--verbose` - displays lot of debug info
+- `--prune` - remove devDependencies from deployed tarball
 
 # Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
