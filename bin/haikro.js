@@ -35,7 +35,8 @@ if (argv._.indexOf('build') !== -1) {
 	promise = promise.then(function() {
 		return build({
 			project: argv.project,
-			strict: argv.strict
+			strict: argv.strict,
+			prune : (argv.prune || argv.P)
 		});
 	});
 }
