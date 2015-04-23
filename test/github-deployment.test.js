@@ -27,7 +27,7 @@ describe('github deployment', function() {
 				token = result;
 			})
 			.then(function() {
-				return create({ token: token });
+				return create({ token: token, organization: 'Financial-Times' });
 			})
 			.then(function(name) { app = name; })
 			.then(function() {

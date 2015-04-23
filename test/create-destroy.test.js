@@ -24,7 +24,7 @@ describe('create and destroy', function() {
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
 				token = result;
-				return create({ token: token });
+				return create({ token: token, organization: 'Financial-Times' });
 			})
 			.then(function(name) { app = name; })
 
