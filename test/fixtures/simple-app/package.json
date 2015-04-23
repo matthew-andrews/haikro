@@ -3,6 +3,7 @@
     "dep-test": "*"
   },
   "devDependencies": {
+    "dep-test": "*",
     "dev-dep-test": "*"
   }
 }
