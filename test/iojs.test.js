@@ -29,7 +29,7 @@ describe('iojs deployment', function() {
 				return build({ project: project });
 			})
 			.then(function() {
-				return create({ token: token });
+				return create({ token: token, organization: 'financial-times' });
 			})
 			.then(function(name) { app = name; })
 			.then(function() {
