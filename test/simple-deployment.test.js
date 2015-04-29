@@ -17,11 +17,14 @@ var create = require('../lib/create');
 var destroy = require('../lib/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
+var scale = require('../lib/scale');
 
-describe('simple deployment', function() {
+describe('simple deployment', function () {
 	it('can create, deploy and delete an app', function(done) {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/simple-app';
+
+		var appName = 'haikro2-' + require(project + '/package.json').name;
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
@@ -29,7 +32,7 @@ describe('simple deployment', function() {
 				return build({ project: project });
 			})
 			.then(function() {
-				return create({ token: token, organization: 'financial-times' });
+				return create({ token: token, organization: 'financial-times', app: appName });
 			})
 			.then(function(name) { app = name; })
 			.then(function() {
@@ -42,6 +45,13 @@ describe('simple deployment', function() {
 
 			// HACK - Give Heroku a second or two to sort itself out
 			.then(promiseToWait(4))
+			.then(function () {
+				return scale({
+					app: appName,
+					token: token
+				});
+			})
+			.then(promiseToWait(4))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
@@ -53,6 +63,7 @@ describe('simple deployment', function() {
 				assert(/the simplest webserver in the world/.test(body));
 				assert(/dep:this file should be here/.test(body));
 				assert(/devDep:this file wasn't here/.test(body));
+				assert(/worker:Worker text/.test(body));
 			})
 			.then(function() {
 				return destroy({
