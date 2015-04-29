@@ -89,6 +89,7 @@ If you want to use **iojs** just change your `package.json`'s `engines` to:-
 - `--organization` - Which organization to create app in (when used with `haikro create`)
 - `--commit` - free text used to identify a release
 - `--heroku-token` - Heroku auth token
+- `--process-type` - Desired process type for Heroku app, defaults to `web`
 - `--silent` - displays no debug info
 - `--verbose` - displays lot of debug info
 

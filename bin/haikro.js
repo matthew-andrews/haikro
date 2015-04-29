@@ -66,7 +66,8 @@ if (argv._.indexOf('deploy') !== -1) {
 			commit: argv.commit,
 			project: argv.project || process.cwd(),
 			token: argv['heroku-token'],
-			useLegacyToken: !!argv.token
+			useLegacyToken: !!argv.token,
+			processType: argv['process-type']
 		});
 	});
 }
