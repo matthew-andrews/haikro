@@ -6,6 +6,7 @@ require('isomorphic-fetch');
 var argv = require('minimist')(process.argv.slice(2));
 var logger = require('../lib/logger');
 var promise = Promise.resolve();
+var getProcessesProfiles = require('../lib/get-processes-profiles');
 
 if (argv.verbose) {
 	logger.setLevel('debug');
@@ -78,7 +79,7 @@ if (argv._.indexOf('scale') !== -1) {
 		var opts = {
 			token: argv['heroku-token'],
 			app: argv.app,
-			processProfiles: getProcesseProfiles(argv.processes)
+			processProfiles: getProcessesProfiles(argv.processes)
 		};
 		return scale(opts);
 	}).then(function(app) {
@@ -116,21 +117,3 @@ promise.then(function() {
 	logger.error(err.message);
 	process.exit(1);
 });
-
-
-function getProcesseProfiles (args) {
-	var processes = args.split(',');
-	var processProfiles = {};
-	processProfiles.updates = processes.map(function (process) {
-		var processParts = process.split(':');
-		if (processParts.length < 3) {
-			throw new Error('A process needs a name, size and quantity');
-		}
-		return {
-			process: processParts[0],
-			size: processParts[1],
-			quantity: processParts[2]
-		};
-	});
-	return processProfiles;
-}
