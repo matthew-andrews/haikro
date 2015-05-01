@@ -73,13 +73,14 @@ if (argv._.indexOf('deploy') !== -1) {
 
 if (argv._.indexOf('scale') !== -1) {
 	logger.verbose("will scale");
-	var create = require('../lib/scale');
+	var scale = require('../lib/scale');
 	promise = promise.then(function() {
-		return create({
+		var opts = {
 			token: argv['heroku-token'],
 			app: argv.app,
 			processProfiles: getProcesseProfiles(argv.processes)
-		});
+		};
+		return scale(opts);
 	}).then(function(app) {
 		argv.app = app;
 	});
@@ -123,12 +124,12 @@ function getProcesseProfiles (args) {
 	processProfiles.updates = processes.map(function (process) {
 		var processParts = process.split(':');
 		if (processParts.length < 3) {
-			throw new Error('A process needs a name, size and quanitity');
+			throw new Error('A process needs a name, size and quantity');
 		}
 		return {
 			process: processParts[0],
 			size: processParts[1],
-			quanitity: processParts[2]
+			quantity: processParts[2]
 		};
 	});
 	return processProfiles;
