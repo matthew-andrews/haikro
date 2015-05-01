@@ -40,7 +40,7 @@ describe('simple deployment', function () {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/simple-app';
 
-		var appName = 'haikro-test-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
+		var appName = 'haikro-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
