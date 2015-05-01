@@ -64,7 +64,7 @@ describe('simple deployment', function () {
 					processProfiles: processProfiles
 				});
 			})
-			.then(promiseToWait(5))
+			.then(promiseToWait(10))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
