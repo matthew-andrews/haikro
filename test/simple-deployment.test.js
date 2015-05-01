@@ -18,13 +18,25 @@ var destroy = require('../lib/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 var scale = require('../lib/scale');
+var processProfiles = {
+							updates:[{
+								"process":"web",
+								"quantity":1,
+								"size":"2X"
+							},
+							{
+								"process":"worker",
+								"quantity":1,
+								"size":"2X"
+							}]
+						};
 
 describe('simple deployment', function () {
 	it('can create, deploy and delete an app', function(done) {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/simple-app';
 
-		var appName = 'haikro2-' + require(project + '/package.json').name;
+		var appName = 'haikro-test-' + require(project + '/package.json').name;
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
@@ -48,10 +60,11 @@ describe('simple deployment', function () {
 			.then(function () {
 				return scale({
 					app: appName,
-					token: token
+					token: token,
+					processProfiles: processProfiles
 				});
 			})
-			.then(promiseToWait(4))
+			.then(promiseToWait(5))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
@@ -63,7 +76,7 @@ describe('simple deployment', function () {
 				assert(/the simplest webserver in the world/.test(body));
 				assert(/dep:this file should be here/.test(body));
 				assert(/devDep:this file wasn't here/.test(body));
-				assert(/worker:Worker text/.test(body));
+				assert(/worker:yarp/.test(body));
 			})
 			.then(function() {
 				return destroy({

@@ -1,7 +1,7 @@
 'use strict';
 var http = require('http');
 var pkg = require('./package.json');
-var appName = 'haikro2-' + pkg.name + '.herokuapp.com';
+var appName = 'haikro-test-' + pkg.name + '.herokuapp.com';
 console.log(appName);
 
 var options = {
@@ -24,4 +24,5 @@ function makeRequest () {
 		});
 	}).end();
 }
-setInterval(makeRequest, 10000);
+makeRequest();
+setInterval(makeRequest, 5000);

@@ -1,4 +1,5 @@
 {
+  "name":"simple-app",
   "dependencies": {
     "dep-test": "*"
   },
