@@ -71,6 +71,20 @@ if (argv._.indexOf('deploy') !== -1) {
 	});
 }
 
+if (argv._.indexOf('scale') !== -1) {
+	logger.verbose("will scale");
+	var create = require('../lib/scale');
+	promise = promise.then(function() {
+		return create({
+			token: argv['heroku-token'],
+			app: argv.app,
+			processProfiles: getProcesseProfiles(argv.processes)
+		});
+	}).then(function(app) {
+		argv.app = app;
+	});
+}
+
 if (argv._.indexOf('gh-deploy') !== -1) {
 	logger.verbose("will gh-deploy");
 	var ghDeploy = require('../lib/gh-deploy');
@@ -101,3 +115,21 @@ promise.then(function() {
 	logger.error(err.message);
 	process.exit(1);
 });
+
+
+function getProcesseProfiles (args) {
+	var processes = args.split(',');
+	var processProfiles = {};
+	processProfiles.updates = processes.map(function (process) {
+		var processParts = process.split(':');
+		if (processParts.length < 3) {
+			throw new Error('A process needs a name, size and quanitity');
+		}
+		return {
+			process: processParts[0],
+			size: processParts[1],
+			quanitity: processParts[2]
+		};
+	});
+	return processProfiles;
+}
