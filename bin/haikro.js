@@ -6,6 +6,7 @@ require('isomorphic-fetch');
 var argv = require('minimist')(process.argv.slice(2));
 var logger = require('../lib/logger');
 var promise = Promise.resolve();
+var getProcessesProfiles = require('../lib/get-processes-profiles');
 
 if (argv.verbose) {
 	logger.setLevel('debug');
@@ -68,6 +69,21 @@ if (argv._.indexOf('deploy') !== -1) {
 			token: argv['heroku-token'],
 			useLegacyToken: !!argv.token
 		});
+	});
+}
+
+if (argv._.indexOf('scale') !== -1) {
+	logger.verbose("will scale");
+	var scale = require('../lib/scale');
+	promise = promise.then(function() {
+		var opts = {
+			token: argv['heroku-token'],
+			app: argv.app,
+			processProfiles: getProcessesProfiles(argv.processes)
+		};
+		return scale(opts);
+	}).then(function(app) {
+		argv.app = app;
 	});
 }
 

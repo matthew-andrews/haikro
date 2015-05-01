@@ -1,7 +1,7 @@
 haikro [![Build Status](https://travis-ci.org/matthew-andrews/haikro.svg?branch=test)](https://travis-ci.org/matthew-andrews/haikro)
 ======
 
-A tool to make + deploy node apps as self contained tarballs to Heroku.  [Read the explainer on my blog.](https://mattandre.ws/2014/11/haikro-heroku-deloys-node-js/)
+A tool to make, deploy, scale and destroy node/iojs apps as self contained tarballs to Heroku.  [Read the explainer on my blog.](https://mattandre.ws/2014/11/haikro-heroku-deloys-node-js/)
 
 ## Installation
 
@@ -91,6 +91,9 @@ If you want to use **iojs** just change your `package.json`'s `engines` to:-
 - `--heroku-token` - Heroku auth token
 - `--silent` - displays no debug info
 - `--verbose` - displays lot of debug info
+- `--processes` - Specify how app processes should be scaled. Use the format procName:Size:Quantity. E.g. web:2x:2,worker:1x:1
+
+`e.g.` create build deploy scale --processes web:2x:4,worker1:1x:1,worker2:1x:1 --region eu --organization my-org --app my-exciting-app --heroku-token 1234 --verbose
 
 # Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
