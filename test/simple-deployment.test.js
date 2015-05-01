@@ -77,7 +77,7 @@ describe('simple deployment', function () {
 					}
 				});
 			})
-			.then(promiseToWait(10))
+			.then(promiseToWait(15))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
