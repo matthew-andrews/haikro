@@ -1,8 +1,8 @@
 'use strict';
 var http = require('http');
 var pkg = require('./package.json');
-var appName = 'haikro-test-' + pkg.name + '.herokuapp.com';
-console.log(appName);
+var appName = process.env.APP_NAME + '.herokuapp.com';
+console.log('This app is called ', appName);
 
 var options = {
 	host: appName,
@@ -20,7 +20,7 @@ function makeRequest () {
 
 		//the whole response has been recieved, so we just print it out here
 		response.on('end', function () {
-			console.log(str);
+			console.log('Made the request...');
 		});
 	}).end();
 }

@@ -3,6 +3,9 @@
 // Test stuff
 var assert = require("assert");
 
+// Util type shiz
+var makeAppNameSuffix = require('./makeAppNameSuffix');
+
 // Promise stuff
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -18,11 +21,12 @@ var destroy = require('../lib/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 var scale = require('../lib/scale');
+var updateConfig = require('../lib/config-vars');
 var processProfiles = {
 							updates:[{
 								"process":"web",
-								"quantity":1,
-								"size":"2X"
+								"quantity":2,
+								"size":"1X"
 							},
 							{
 								"process":"worker",
@@ -36,7 +40,7 @@ describe('simple deployment', function () {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/simple-app';
 
-		var appName = 'haikro-test-' + require(project + '/package.json').name;
+		var appName = 'haikro-test-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
 
 		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
 			.then(function(result) {
@@ -62,6 +66,15 @@ describe('simple deployment', function () {
 					app: appName,
 					token: token,
 					processProfiles: processProfiles
+				});
+			})
+			.then(function () {
+				return updateConfig({
+					app: appName,
+					token: token,
+					configVars: {					
+						"APP_NAME": appName
+					}
 				});
 			})
 			.then(promiseToWait(10))
