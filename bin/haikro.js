@@ -31,7 +31,7 @@ if (argv._.indexOf('create') !== -1) {
 }
 
 if (argv._.indexOf('build') !== -1) {
-	logger.verbose("will build");
+	logger.verbose("will build", argv.project || '(no project specified)');
 	var build = require('../lib/build');
 	promise = promise.then(function() {
 		return build({
@@ -59,7 +59,7 @@ if (argv._.indexOf('deploy') !== -1) {
 		logger.warn("--token is deprecated, use --heroku-token");
 		argv['heroku-token'] = argv.token;
 	}
-	logger.verbose("will deploy");
+	logger.verbose("will deploy", argv.app);
 	var deploy = require('../lib/deploy');
 	promise = promise.then(function() {
 		return deploy({
@@ -88,7 +88,7 @@ if (argv._.indexOf('scale') !== -1) {
 }
 
 if (argv._.indexOf('gh-deploy') !== -1) {
-	logger.verbose("will gh-deploy");
+	logger.verbose("will gh-deploy", argv.app);
 	var ghDeploy = require('../lib/gh-deploy');
 	promise = promise.then(function() {
 		return ghDeploy({
