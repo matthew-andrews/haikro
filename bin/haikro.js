@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 'use strict';
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 var argv = require('minimist')(process.argv.slice(2));
