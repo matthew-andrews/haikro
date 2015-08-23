@@ -1,3 +1,4 @@
+*.DS_Store
 /node_modules/
 /test/fixtures/simple-app/node-*
 /test/fixtures/simple-app/.haikro-cache

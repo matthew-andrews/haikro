@@ -20,8 +20,7 @@
     "glob": "^5.0.5",
     "isomorphic-fetch": "^1.0.0",
     "minimist": "^1.1.0",
-    "semver": "^4.3.3",
-    "winston": "^0.8.1"
+    "semver": "^4.3.3"
   },
   "devDependencies": {
     "jshint": "^2.5.10",

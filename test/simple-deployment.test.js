@@ -13,9 +13,6 @@ var denodeify = require('denodeify');
 var exec = denodeify(require('child_process').exec, function(err, stdout, stderr) { return [err, stdout]; });
 var promiseToWait = require('./promise-to-wait');
 
-// Haikro stuff
-var logger = require('../lib/logger');
-logger.setLevel('debug');
 var create = require('../lib/create');
 var destroy = require('../lib/destroy');
 var build = require('../lib/build');
