@@ -18,7 +18,7 @@ describe('simple deployment', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/even-simpler-app';
 
-		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
+		exec('heroku auth:token')
 			.then(function(result) {
 				token = result;
 				return build({ project: project });

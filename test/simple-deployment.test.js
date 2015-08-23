@@ -18,17 +18,19 @@ var deploy = require('../lib/deploy');
 var scale = require('../lib/scale');
 var updateConfig = require('../lib/config-vars');
 var processProfiles = {
-							updates:[{
-								"process":"web",
-								"quantity":2,
-								"size":"1X"
-							},
-							{
-								"process":"worker",
-								"quantity":1,
-								"size":"2X"
-							}]
-						};
+	updates:[
+		{
+			"process":"web",
+			"quantity":2,
+			"size":"1X"
+		},
+		{
+			"process":"worker",
+			"quantity":1,
+			"size":"2X"
+		}
+	]
+};
 
 describe('simple deployment', function () {
 	it('can create, deploy and delete an app', function(done) {
@@ -37,7 +39,7 @@ describe('simple deployment', function () {
 
 		var appName = 'haikro-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
 
-		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
+		exec('heroku auth:token')
 			.then(function(result) {
 				token = result;
 				return build({ project: project });
