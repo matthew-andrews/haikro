@@ -114,6 +114,6 @@ if (argv._.indexOf('destroy') !== -1) {
 promise.then(function() {
 	logger.verbose("haikro out");
 }, function(err) {
-	logger.error(err.message);
+	logger.error(err.stack);
 	process.exit(1);
 });
