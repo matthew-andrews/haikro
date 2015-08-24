@@ -19,7 +19,8 @@
     "glob": "^5.0.5",
     "isomorphic-fetch": "^1.0.0",
     "minimist": "^1.1.0",
-    "semver": "^4.3.3"
+    "semver": "^4.3.3",
+    "shellpromise": "^1.1.0"
   },
   "devDependencies": {
     "jshint": "^2.5.10",

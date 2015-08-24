@@ -4,8 +4,7 @@
 var assert = require("assert");
 
 require('isomorphic-fetch');
-var denodeify = require('denodeify');
-var exec = denodeify(require('child_process').exec, function(err, stdout, stderr) { return [err, stdout]; });
+var shellpromise = require('shellpromise');
 var promiseToWait = require('./promise-to-wait');
 
 var create = require('../lib/create');
@@ -18,7 +17,7 @@ describe('simple deployment', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/run-things-in-bin';
 
-		exec('heroku auth:token')
+		shellpromise('heroku auth:token')
 			.then(function(result) {
 				token = result;
 				return build({ project: project });
