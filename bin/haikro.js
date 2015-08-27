@@ -38,6 +38,6 @@ if (argv._.indexOf('deploy') !== -1) {
 promise.then(function() {
 	console.log("haikro out");
 }, function(err) {
-	logger.error(err.stack);
+	console.log(err.stack);
 	process.exit(1);
 });
