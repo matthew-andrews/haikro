@@ -4,7 +4,7 @@ node_js:
 - '0.12.7'
 before_script:
 - echo "machine api.heroku.com login matthew.andrews@ft.com password ${HEROKU_AUTH_TOKEN}" >> ${HOME}/.netrc;
-- chmod 0600 /home/ubuntu/.netrc;
+- chmod 0600 ${HOME}/.netrc;
 before_deploy:
 - npm-prepublish --verbose
 deploy:
