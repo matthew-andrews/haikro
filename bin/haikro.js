@@ -2,42 +2,49 @@
 'use strict';
 require('isomorphic-fetch');
 
-var argv = require('minimist')(process.argv.slice(2));
-var promise = Promise.resolve();
-var getProcessesProfiles = require('../lib/get-processes-profiles');
+var program = require('commander');
 
-if (argv._.indexOf('build') !== -1) {
-	console.log("will build");
-	var build = require('../lib/build');
-	promise = promise.then(function() {
-		return build({
-			project: argv.project,
-			strict: argv.strict
-		});
+var build = require('../lib/build');
+var deploy = require('../lib/deploy');
+
+program
+	.command('build')
+	.description('packages an app ready to be put onto Heroku')
+	.option('--program', 'directory to package up')
+	.option('--strict', 'be strict about which runtimes haikro can run in')
+	.action(function(opts) {
+		console.log("will build");
+		build({
+			project: opts.project || process.cwd(),
+			strict: opts.strict
+		})
+			.then(succeed)
+			.catch(error);
 	});
-}
 
-if (argv._.indexOf('deploy') !== -1) {
-	if (argv.token) {
-		console.log("--token is deprecated, use --heroku-token");
-		argv['heroku-token'] = argv.token;
-	}
-	console.log("will deploy");
-	var deploy = require('../lib/deploy');
-	promise = promise.then(function() {
-		return deploy({
-			app: argv.app,
-			commit: argv.commit,
-			project: argv.project || process.cwd(),
-			token: argv['heroku-token'],
-			useLegacyToken: !!argv.token
-		});
+program
+	.command('deploy')
+	.deploy('uploads and releases app to heroku')
+	.option('--app', 'name of application on Heroku')
+	.option('--commit', 'commit hash to show next to release')
+	.option('--project', 'directory to look for haikro tarball')
+	.action(function(opts) {
+		console.log('will deploy');
+		deploy({
+			app: opts.app,
+			commit: opts.commit,
+			project: opts.project || process.cwd()
+		})
+			.then(succeed)
+			.catch(error);
+
 	});
-}
 
-promise.then(function() {
-	console.log("haikro out");
-}, function(err) {
+function error(err) {
 	console.log(err.stack);
 	process.exit(1);
-});
+}
+
+function succeed() {
+	console.log('haikro out');
+}
