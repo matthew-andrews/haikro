@@ -2,7 +2,8 @@ sudo: false
 language: node_js
 node_js:
 - '0.12.7'
-before_script:
+before_install:
+- wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 - echo "machine api.heroku.com login matthew.andrews@ft.com password ${HEROKU_AUTH_TOKEN}" >> ${HOME}/.netrc;
 - chmod 0600 ${HOME}/.netrc;
 before_deploy:
