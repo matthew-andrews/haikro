@@ -10,46 +10,26 @@ require('isomorphic-fetch');
 var shellpromise = require('shellpromise');
 var promiseToWait = require('./promise-to-wait');
 
-var create = require('../lib/create');
-var destroy = require('../lib/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
-var scale = require('../lib/scale');
-var updateConfig = require('../lib/config-vars');
-var processProfiles = {
-	updates:[
-		{
-			"process":"web",
-			"quantity":2,
-			"size":"1X"
-		},
-		{
-			"process":"worker",
-			"quantity":1,
-			"size":"2X"
-		}
-	]
-};
 
-describe('simple deployment', function () {
-	it('can create, deploy and delete an app', function(done) {
+describe('simple deployment', function() {
+	it('can create, deploy and delete an app', function() {
 		this.timeout(120 * 1000);
-		var app, token, project = __dirname + '/fixtures/simple-app';
-
+		var token, project = __dirname + '/fixtures/simple-app';
 		var appName = 'haikro-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
 
-		shellpromise('heroku auth:token')
+		return shellpromise('heroku auth:token')
 			.then(function(result) {
-				token = result;
+				token = result.trim();
 				return build({ project: project });
 			})
 			.then(function() {
-				return create({ token: token, organization: 'financial-times', app: appName });
+				return shellpromise('heroku apps:create --org financial-times --app ' + appName + ' --no-remote', { verbose: true });
 			})
-			.then(function(name) { app = name; })
 			.then(function() {
 				return deploy({
-					app: app,
+					app: appName,
 					token: token,
 					project: project
 				});
@@ -57,25 +37,15 @@ describe('simple deployment', function () {
 
 			// HACK - Give Heroku a second or two to sort itself out
 			.then(promiseToWait(4))
-			.then(function () {
-				return scale({
-					app: appName,
-					token: token,
-					processProfiles: processProfiles
-				});
+			.then(function() {
+				return shellpromise('heroku ps:scale web=2:standard-2X worker=1:standard-1X --app ' + appName, { verbose: true });
 			})
-			.then(function () {
-				return updateConfig({
-					app: appName,
-					token: token,
-					configVars: {					
-						"APP_NAME": appName
-					}
-				});
+			.then(function() {
+				return shellpromise('heroku config:set APP_NAME=' + appName + ' --app ' + appName, { verbose: true });
 			})
 			.then(promiseToWait(15))
 			.then(function() {
-				return fetch('https://' + app + '.herokuapp.com/');
+				return fetch('https://' + appName + '.herokuapp.com/');
 			})
 			.then(function(response) {
 				assert.equal(200, response.status);
@@ -88,12 +58,7 @@ describe('simple deployment', function () {
 				assert(/worker:yarp/.test(body));
 			})
 			.then(function() {
-				return destroy({
-					token: token,
-					app: app
-				});
-			})
-			.then(done.bind(this, null))
-			.catch(done);
+				return shellpromise('heroku apps:destroy --app ' + appName + ' --confirm ' + appName);
+			});
 	});
 });
