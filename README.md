@@ -85,15 +85,9 @@ If you want to use **iojs** just change your `package.json`'s `engines` to:-
 ## CLI Options
 
 - `--app` - Heroku app name
-- `--region` - Which region to create app in (when used with `haikro create`)
-- `--organization` - Which organization to create app in (when used with `haikro create`)
 - `--commit` - free text used to identify a release
-- `--heroku-token` - Heroku auth token
-- `--silent` - displays no debug info
-- `--verbose` - displays lot of debug info
-- `--processes` - Specify how app processes should be scaled. Use the format procName:Size:Quantity. E.g. web:2x:2,worker:1x:1
 
-`e.g.` create build deploy scale --processes web:2x:4,worker1:1x:1,worker2:1x:1 --region eu --organization my-org --app my-exciting-app --heroku-token 1234 --verbose
+e.g. `haikro build deploy --app my-exciting-app`
 
 # Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
