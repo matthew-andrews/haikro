@@ -5,7 +5,7 @@ var assert = require("assert");
 
 require('isomorphic-fetch');
 var shellpromise = require('shellpromise');
-var promiseToWait = require('./promise-to-wait');
+var promiseToWait = require('./tools/promise-to-wait');
 var create = require('./tools/create');
 var destroy = require('./tools/destroy');
 
