@@ -7,13 +7,13 @@ require('isomorphic-fetch');
 var shellpromise = require('shellpromise');
 var promiseToWait = require('./tools/promise-to-wait');
 
-var create = require('../lib/create');
-var destroy = require('../lib/destroy');
+var create = require('./tools/create');
+var destroy = require('./tools/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 
 describe('simple deployment', function() {
-	it('can run apps without Procfiles, falling back to npm start instead', function(done) {
+	it('can run apps without Procfiles, falling back to npm start instead', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/npm-start';
 
@@ -23,10 +23,10 @@ describe('simple deployment', function() {
 				return build({ project: project });
 			})
 			.then(function() {
-				return create({ token: token, organization: 'financial-times' });
+				return create();
 			})
-			.then(function(name) { app = name; })
-			.then(function() {
+			.then(function(name) {
+				app = name;
 				return deploy({
 					app: app,
 					token: token,
@@ -47,12 +47,7 @@ describe('simple deployment', function() {
 				assert(/the simplest webserver in the bin/.test(body));
 			})
 			.then(function() {
-				return destroy({
-					token: token,
-					app: app
-				});
-			})
-			.then(done.bind(this, null))
-			.catch(done);
+				return destroy(app);
+			});
 	});
 });
