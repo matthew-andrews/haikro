@@ -1,6 +1,6 @@
 {
   "name": "haikro",
-  "version": "0.0.0",
+  "version": "1.14.3",
   "bin": {
     "haikro": "bin/haikro.js"
   },
@@ -15,18 +15,16 @@
     "test": "npm run jshint && npm run lintspaces && mocha test/*.test.js"
   },
   "dependencies": {
+    "commander": "^2.8.1",
     "denodeify": "^1.1.2",
-    "es6-promise": "^2.0.0",
     "glob": "^5.0.5",
     "isomorphic-fetch": "^1.0.0",
-    "minimist": "^1.1.0",
     "semver": "^4.3.3",
-    "winston": "^0.8.1"
+    "shellpromise": "^1.1.0"
   },
   "devDependencies": {
     "jshint": "^2.5.10",
-    "lintspaces-cli": "0.0.4",
-    "mocha": "^2.0.1",
-    "npm-prepublish": "^1.0.2"
+    "lintspaces-cli": "0.1.0",
+    "mocha": "^2.0.1"
   }
 }

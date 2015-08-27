@@ -1,119 +1,51 @@
 #!/usr/bin/env node
 'use strict';
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-var argv = require('minimist')(process.argv.slice(2));
-var logger = require('../lib/logger');
-var promise = Promise.resolve();
-var getProcessesProfiles = require('../lib/get-processes-profiles');
+var program = require('commander');
 
-if (argv.verbose) {
-	logger.setLevel('debug');
-}
-if (argv.silent) {
-	logger.setLevel('silent');
-}
+var build = require('../lib/build');
+var deploy = require('../lib/deploy');
 
-if (argv._.indexOf('create') !== -1) {
-	logger.verbose("will create");
-	var create = require('../lib/create');
-	promise = promise.then(function() {
-		return create({
-			token: argv['heroku-token'],
-			app: argv.app,
-			region: argv.region,
-			organization: argv.organization
-		});
-	}).then(function(app) {
-		argv.app = app;
+program
+	.command('build')
+	.description('packages an app ready to be put onto Heroku')
+	.option('--project [project]', 'directory to package up')
+	.option('--strict', 'be strict about which runtimes haikro can run in')
+	.action(function(opts) {
+		console.log("will build");
+		build({
+			project: opts.project || process.cwd(),
+			strict: opts.strict
+		})
+			.then(succeed)
+			.catch(error);
 	});
-}
 
-if (argv._.indexOf('build') !== -1) {
-	logger.verbose("will build");
-	var build = require('../lib/build');
-	promise = promise.then(function() {
-		return build({
-			project: argv.project,
-			strict: argv.strict
-		});
+program
+	.command('deploy')
+	.description('uploads and releases app to heroku')
+	.option('--app [app]', 'name of application on Heroku')
+	.option('--commit [commit]', 'commit hash to show next to release')
+	.option('--project [project]', 'directory to look for haikro tarball')
+	.action(function(opts) {
+		console.log('will deploy ' + opts.app);
+		deploy({
+			app: opts.app,
+			commit: opts.commit,
+			project: opts.project || process.cwd()
+		})
+			.then(succeed)
+			.catch(error);
 	});
-}
 
-if (argv._.indexOf('release') !== -1) {
-	logger.verbose("will release");
-	var release = require('../lib/release');
-	promise = promise.then(function() {
-		return release({
-			project: argv.project,
-			token: argv['github-token'],
-			repository: argv.repository,
-			tag: argv.tag
-		});
-	});
-}
-
-if (argv._.indexOf('deploy') !== -1) {
-	if (argv.token) {
-		logger.warn("--token is deprecated, use --heroku-token");
-		argv['heroku-token'] = argv.token;
-	}
-	logger.verbose("will deploy");
-	var deploy = require('../lib/deploy');
-	promise = promise.then(function() {
-		return deploy({
-			app: argv.app,
-			commit: argv.commit,
-			project: argv.project || process.cwd(),
-			token: argv['heroku-token'],
-			useLegacyToken: !!argv.token
-		});
-	});
-}
-
-if (argv._.indexOf('scale') !== -1) {
-	logger.verbose("will scale");
-	var scale = require('../lib/scale');
-	promise = promise.then(function() {
-		var opts = {
-			token: argv['heroku-token'],
-			app: argv.app,
-			processProfiles: getProcessesProfiles(argv.processes)
-		};
-		return scale(opts);
-	}).then(function(app) {
-		argv.app = app;
-	});
-}
-
-if (argv._.indexOf('gh-deploy') !== -1) {
-	logger.verbose("will gh-deploy");
-	var ghDeploy = require('../lib/gh-deploy');
-	promise = promise.then(function() {
-		return ghDeploy({
-			app: argv.app,
-			tag: argv.tag,
-			token: argv['heroku-token'],
-			repository: argv.repository
-		});
-	});
-}
-
-if (argv._.indexOf('destroy') !== -1) {
-	logger.verbose("will destroy");
-	var destroy = require('../lib/destroy');
-	promise = promise.then(function() {
-		return destroy({
-			token: argv['heroku-token'],
-			app: argv.app
-		});
-	});
-}
-
-promise.then(function() {
-	logger.verbose("haikro out");
-}, function(err) {
-	logger.error(err.stack);
+function error(err) {
+	console.log(err.stack);
 	process.exit(1);
-});
+}
+
+function succeed() {
+	console.log('haikro out');
+}
+
+program.parse(process.argv);

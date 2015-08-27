@@ -3,29 +3,18 @@
 // Test stuff
 var assert = require("assert");
 
-// Promise stuff
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
-var denodeify = require('denodeify');
-var exec = denodeify(require('child_process').exec, function(err, stdout, stderr) { return [err, stdout]; });
-var promiseToWait = require('./promise-to-wait');
-
-// Haikro stuff
-var logger = require('../lib/logger');
-logger.setLevel('debug');
-var create = require('../lib/create');
-var destroy = require('../lib/destroy');
+var shellpromise = require('shellpromise');
+var promiseToWait = require('./tools/promise-to-wait');
+var create = require('./tools/create');
+var destroy = require('./tools/destroy');
 
 describe('create and destroy', function() {
-	it('can create and delete an app', function(done) {
+	it('can create and delete an app', function() {
 		this.timeout(60 * 1000);
-		var app, token;
+		var app;
 
-		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
-			.then(function(result) {
-				token = result;
-				return create({ token: token, organization: 'financial-times' });
-			})
+		return create()
 			.then(function(name) { app = name; })
 
 			// HACK - Give Heroku a second or two to sort itself out
@@ -41,12 +30,36 @@ describe('create and destroy', function() {
 				assert(/Welcome to your new app!/.test(body));
 			})
 			.then(function() {
-				return destroy({
-					token: token,
-					app: app
-				});
-			})
-			.then(done.bind(this, null))
-			.catch(done);
+				return destroy(app);
+			});
 	});
+
+	it('can create and delete a named app', function() {
+		this.timeout(60 * 1000);
+		var app;
+		var desiredName = 'ft-haikro-test' + (Date.now() % 10000);
+
+		return create(desiredName)
+			.then(function(name) {
+				app = name;
+				assert(app === desiredName);
+			})
+
+			// HACK - Give Heroku a second or two to sort itself out
+			.then(promiseToWait(2))
+			.then(function() {
+				return fetch('https://' + app + '.herokuapp.com/');
+			})
+			.then(function(response) {
+				assert.equal(502, response.status);
+				return response.text();
+			})
+			.then(function(body) {
+				assert(/Welcome to your new app!/.test(body));
+			})
+			.then(function() {
+				return destroy(app);
+			});
+	});
+
 });

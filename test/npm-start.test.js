@@ -3,36 +3,30 @@
 // Test stuff
 var assert = require("assert");
 
-// Promise stuff
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
-var denodeify = require('denodeify');
-var exec = denodeify(require('child_process').exec, function(err, stdout, stderr) { return [err, stdout]; });
-var promiseToWait = require('./promise-to-wait');
+var shellpromise = require('shellpromise');
+var promiseToWait = require('./tools/promise-to-wait');
 
-// Haikro stuff
-var logger = require('../lib/logger');
-logger.setLevel('debug');
-var create = require('../lib/create');
-var destroy = require('../lib/destroy');
+var create = require('./tools/create');
+var destroy = require('./tools/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 
 describe('simple deployment', function() {
-	it('can run apps without Procfiles, falling back to npm start instead', function(done) {
+	it('can run apps without Procfiles, falling back to npm start instead', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/npm-start';
 
-		(process.env.HEROKU_AUTH_TOKEN ? Promise.resolve(process.env.HEROKU_AUTH_TOKEN) : exec('heroku auth:token'))
+		shellpromise('heroku auth:token')
 			.then(function(result) {
 				token = result;
 				return build({ project: project });
 			})
 			.then(function() {
-				return create({ token: token, organization: 'financial-times' });
+				return create();
 			})
-			.then(function(name) { app = name; })
-			.then(function() {
+			.then(function(name) {
+				app = name;
 				return deploy({
 					app: app,
 					token: token,
@@ -53,12 +47,7 @@ describe('simple deployment', function() {
 				assert(/the simplest webserver in the bin/.test(body));
 			})
 			.then(function() {
-				return destroy({
-					token: token,
-					app: app
-				});
-			})
-			.then(done.bind(this, null))
-			.catch(done);
+				return destroy(app);
+			});
 	});
 });
