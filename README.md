@@ -27,15 +27,8 @@ deploy:
 	sass styles.scss public/styles.css
 	
 	# Package+deploy
-	@haikro build deploy \
-		--app $(app) \
-		--heroku-token $(HEROKU_AUTH_TOKEN) \
-		--commit `git rev-parse HEAD`
-```
-
-Where `HEROKU_AUTH_TOKEN` is:
-```sh
-heroku auth:token
+	@haikro build
+	@haikro deploy --app $(app) --commit `git rev-parse HEAD`
 ```
 
 Example `Procfile`:-
@@ -68,8 +61,6 @@ Example of `package.json`
 }
 ```
 
-Note: Haikro is also tested with [codeship.io](https://codeship.io).
-
 If you want to use **iojs** just change your `package.json`'s `engines` to:-
 
 ```json
@@ -87,7 +78,7 @@ If you want to use **iojs** just change your `package.json`'s `engines` to:-
 - `--app` - Heroku app name
 - `--commit` - free text used to identify a release
 
-e.g. `haikro build deploy --app my-exciting-app`
+e.g. `haikro deploy --app my-exciting-app`
 
 # Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
