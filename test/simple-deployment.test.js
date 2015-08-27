@@ -4,7 +4,7 @@
 var assert = require("assert");
 
 // Util type shiz
-var makeAppNameSuffix = require('./makeAppNameSuffix');
+var makeAppNameSuffix = require('./make-app-name-suffix');
 
 require('isomorphic-fetch');
 var shellpromise = require('shellpromise');
