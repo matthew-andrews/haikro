@@ -12,6 +12,8 @@ var promiseToWait = require('./promise-to-wait');
 
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
+var create = require('./tools/create');
+var destroy = require('./tools/destroy');
 
 describe('simple deployment', function() {
 	it('can create, deploy and delete an app', function() {
@@ -25,7 +27,7 @@ describe('simple deployment', function() {
 				return build({ project: project });
 			})
 			.then(function() {
-				return shellpromise('heroku apps:create --org financial-times --app ' + appName + ' --no-remote', { verbose: true });
+				return create(appName);
 			})
 			.then(function() {
 				return deploy({
@@ -58,7 +60,7 @@ describe('simple deployment', function() {
 				assert(/worker:yarp/.test(body));
 			})
 			.then(function() {
-				return shellpromise('heroku apps:destroy --app ' + appName + ' --confirm ' + appName);
+				return destroy(appName);
 			});
 	});
 });
