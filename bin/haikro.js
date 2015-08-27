@@ -24,7 +24,7 @@ program
 
 program
 	.command('deploy')
-	.deploy('uploads and releases app to heroku')
+	.description('uploads and releases app to heroku')
 	.option('--app', 'name of application on Heroku')
 	.option('--commit', 'commit hash to show next to release')
 	.option('--project', 'directory to look for haikro tarball')
@@ -37,7 +37,6 @@ program
 		})
 			.then(succeed)
 			.catch(error);
-
 	});
 
 function error(err) {

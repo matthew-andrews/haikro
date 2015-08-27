@@ -1,3 +1,4 @@
+*.swp
 *.DS_Store
 /node_modules/
 /test/fixtures/simple-app/node-*
