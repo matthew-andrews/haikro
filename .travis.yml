@@ -2,6 +2,9 @@ sudo: false
 language: node_js
 node_js:
 - '0.12'
+before_script:
+- echo "machine api.heroku.com login matthew.andrews@ft.com password ${HEROKU_AUTH_TOKEN}" >> ${HOME}/.netrc;
+- chmod 0600 /home/ubuntu/.netrc;
 before_deploy:
 - npm-prepublish --verbose
 deploy:
