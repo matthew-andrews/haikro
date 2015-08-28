@@ -1,4 +1,4 @@
-haikro [![Build Status](https://travis-ci.org/matthew-andrews/haikro.svg?branch=test)](https://travis-ci.org/matthew-andrews/haikro)
+haikro [![Build Status](https://circleci.com/gh/matthew-andrews/haikro.svg)](https://circleci.com/gh/matthew-andrews/haikro)
 ======
 
 A tool to make, deploy, scale and destroy node/iojs apps as self contained tarballs to Heroku.  [Read the explainer on my blog.](https://mattandre.ws/2014/11/haikro-heroku-deloys-node-js/)
