@@ -15,7 +15,7 @@ program
 	.action(function(opts) {
 		console.log("will build");
 		build({
-			project: opts.project || process.cwd(),
+			project: opts.project,
 			strict: opts.strict
 		})
 			.then(succeed)
@@ -33,7 +33,7 @@ program
 		deploy({
 			app: opts.app,
 			commit: opts.commit,
-			project: opts.project || process.cwd()
+			project: opts.project
 		})
 			.then(succeed)
 			.catch(error);
