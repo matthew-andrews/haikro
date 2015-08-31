@@ -26,7 +26,6 @@
   "devDependencies": {
     "jshint": "^2.5.10",
     "lintspaces-cli": "^0.1.0",
-    "mocha": "^2.0.1",
-    "npm-prepublish": "^1.0.2"
+    "mocha": "^2.0.1"
   }
 }
