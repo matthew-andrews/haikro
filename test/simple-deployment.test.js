@@ -54,6 +54,8 @@ describe('simple deployment', function() {
 				return response.text();
 			})
 			.then(function(body) {
+				console.log("Response from " + app);
+				console.log(body);
 				assert(/the simplest webserver in the world/.test(body));
 				assert(/dep:this file should be here/.test(body));
 				assert(/devDep:this file wasn't here/.test(body));
