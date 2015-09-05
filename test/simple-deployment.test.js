@@ -19,7 +19,7 @@ describe('simple deployment', function() {
 	it('can create, deploy and delete an app', function() {
 		this.timeout(120 * 1000);
 		var token, project = __dirname + '/fixtures/simple-app';
-		var appName = 'haikro-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
+		var app = 'haikro-' + require(project + '/package.json').name + '-' + makeAppNameSuffix();
 
 		return shellpromise('heroku auth:token')
 			.then(function(result) {
@@ -27,11 +27,11 @@ describe('simple deployment', function() {
 				return build({ project: project });
 			})
 			.then(function() {
-				return create(appName);
+				return create(app);
 			})
 			.then(function() {
 				return deploy({
-					app: appName,
+					app: app,
 					token: token,
 					project: project
 				});
@@ -40,14 +40,14 @@ describe('simple deployment', function() {
 			// HACK - Give Heroku a second or two to sort itself out
 			.then(promiseToWait(4))
 			.then(function() {
-				return shellpromise('heroku ps:scale web=2:standard-2X worker=1:standard-1X --app ' + appName, { verbose: true });
+				return shellpromise('heroku ps:scale web=2:standard-2X worker=1:standard-1X --app ' + app, { verbose: true });
 			})
 			.then(function() {
-				return shellpromise('heroku config:set APP_NAME=' + appName + ' --app ' + appName, { verbose: true });
+				return shellpromise('heroku config:set APP_NAME=' + app + ' --app ' + app, { verbose: true });
 			})
 			.then(promiseToWait(20))
 			.then(function() {
-				return fetch('https://' + appName + '.herokuapp.com/');
+				return fetch('https://' + app + '.herokuapp.com/');
 			})
 			.then(function(response) {
 				assert.equal(200, response.status);
