@@ -45,7 +45,7 @@ describe('simple deployment', function() {
 			.then(function() {
 				return shellpromise('heroku config:set APP_NAME=' + app + ' --app ' + app, { verbose: true });
 			})
-			.then(promiseToWait(20))
+			.then(promiseToWait(30))
 			.then(function() {
 				return fetch('https://' + app + '.herokuapp.com/');
 			})
