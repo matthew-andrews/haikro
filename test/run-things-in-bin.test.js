@@ -48,6 +48,9 @@ describe('run things in bin deployment', function() {
 			})
 			.then(function() {
 				return destroy(app);
+			}, function(err) {
+				return destroy(app);
+				throw err;
 			});
 	});
 });

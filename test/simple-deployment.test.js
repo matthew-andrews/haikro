@@ -60,7 +60,10 @@ describe('simple deployment', function() {
 				assert(/worker:yarp/.test(body));
 			})
 			.then(function() {
-				return destroy(appName);
+				return destroy(app);
+			}, function(err) {
+				return destroy(app);
+				throw err;
 			});
 	});
 });
