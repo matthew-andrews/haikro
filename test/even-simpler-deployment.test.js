@@ -12,7 +12,7 @@ var destroy = require('./tools/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 
-describe('simple deployment', function() {
+describe('even simpler deployment', function() {
 	it('can create, deploy and delete an app', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/even-simpler-app';
