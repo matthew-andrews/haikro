@@ -60,8 +60,10 @@ describe('create and destroy', function() {
 			.then(function() {
 				return destroy(app);
 			}, function(err) {
-				return destroy(app);
-				throw err;
+				return destroy(app)
+					.then(function() {
+						throw err;
+					});
 			});
 	});
 
