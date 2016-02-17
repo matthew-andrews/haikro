@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-require('isomorphic-fetch');
+GLOBAL.fetch = require('node-fetch');
 
 var program = require('commander');
 

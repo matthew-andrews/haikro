@@ -19,7 +19,7 @@
     "commander": "^2.8.1",
     "denodeify": "^1.1.2",
     "glob": "^5.0.5",
-    "isomorphic-fetch": "^1.0.0",
+    "node-fetch": "^1.3.3",
     "semver": "^4.3.3",
     "shellpromise": "^1.1.0"
   },
