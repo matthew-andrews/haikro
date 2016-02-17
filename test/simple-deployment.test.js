@@ -6,7 +6,7 @@ var assert = require("assert");
 // Util type shiz
 var makeAppNameSuffix = require('./make-app-name-suffix');
 
-require('isomorphic-fetch');
+GLOBAL.fetch = require('node-fetch');
 var shellpromise = require('shellpromise');
 var promiseToWait = require('./tools/promise-to-wait');
 

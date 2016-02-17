@@ -3,7 +3,7 @@
 // Test stuff
 var assert = require("assert");
 
-require('isomorphic-fetch');
+GLOBAL.fetch = require('node-fetch');
 var shellpromise = require('shellpromise');
 var promiseToWait = require('./tools/promise-to-wait');
 var create = require('./tools/create');
