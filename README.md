@@ -16,7 +16,7 @@ I currently recommend installing **haikro** as a devDependency and you need not 
 Example `Makefile`:-
 
 ```sh
-app := my-deplorable-app
+app := my-deployable-app
 
 deploy:
 	# Clean+install dependencies
