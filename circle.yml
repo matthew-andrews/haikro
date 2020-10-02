@@ -1,7 +1,0 @@
-machine:
-  node:
-    version: 0.12.7
-dependencies:
-  pre:
-    - echo "machine api.heroku.com login matthew.andrews@ft.com password ${HEROKU_AUTH_TOKEN}" >> ${HOME}/.netrc;
-    - chmod 0600 ${HOME}/.netrc;
