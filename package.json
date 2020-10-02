@@ -13,7 +13,8 @@
     "jshint": "jshint `npm run -s js-files`",
     "lintspaces": "lintspaces -i js-comments -e .editorconfig `npm run -s js-files`",
     "js-files": "find . -name '*.js' ! -path './node_modules/*'",
-    "test": "npm run jshint && npm run lintspaces && mocha test/*.test.js"
+    "test": "npm run jshint && npm run lintspaces",
+    "integration-test": "npm run jshint && npm run lintspaces && mocha test/*.test.js"
   },
   "dependencies": {
     "commander": "^2.8.1",
