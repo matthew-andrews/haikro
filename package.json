@@ -13,11 +13,9 @@
     "jshint": "jshint `npm run -s js-files`",
     "lintspaces": "lintspaces -i js-comments -e .editorconfig `npm run -s js-files`",
     "js-files": "find . -name '*.js' ! -path './node_modules/*'",
-    "test": "npm run jshint && npm run lintspaces",
-    "integration-test": "npm run jshint && npm run lintspaces && mocha test/*.test.js"
+    "test": "npm run jshint && npm run lintspaces && mocha test/*.test.js"
   },
   "dependencies": {
-    "commander": "^2.8.1",
     "denodeify": "^1.1.2",
     "glob": "^5.0.5",
     "node-fetch": "^2.6.1",
@@ -25,8 +23,9 @@
     "shellpromise": "^1.1.0"
   },
   "devDependencies": {
+    "assert": "^2.0.0",
     "jshint": "^2.5.10",
     "lintspaces-cli": "^0.1.0",
-    "mocha": "^2.0.1"
+    "mocha": "^8.1.3"
   }
 }
