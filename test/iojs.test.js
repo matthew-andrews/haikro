@@ -12,7 +12,7 @@ var destroy = require('./tools/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 
-describe('iojs deployment', function() {
+describe.skip('iojs deployment', function() {
 	it('can create, deploy and delete an app', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/iojs';

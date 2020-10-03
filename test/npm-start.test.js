@@ -12,7 +12,7 @@ var destroy = require('./tools/destroy');
 var build = require('../lib/build');
 var deploy = require('../lib/deploy');
 
-describe('npm start deployment', function() {
+describe.skip('npm start deployment', function() {
 	it('can run apps without Procfiles, falling back to npm start instead', function() {
 		this.timeout(120 * 1000);
 		var app, token, project = __dirname + '/fixtures/npm-start';

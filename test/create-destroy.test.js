@@ -9,7 +9,7 @@ var promiseToWait = require('./tools/promise-to-wait');
 var create = require('./tools/create');
 var destroy = require('./tools/destroy');
 
-describe('create and destroy', function() {
+describe.skip('create and destroy', function() {
 	it('can create and delete an app', function() {
 		this.timeout(60 * 1000);
 		var app;

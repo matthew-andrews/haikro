@@ -15,7 +15,7 @@ var deploy = require('../lib/deploy');
 var create = require('./tools/create');
 var destroy = require('./tools/destroy');
 
-describe('simple deployment', function() {
+describe.skip('simple deployment', function() {
 	it('can create, deploy and delete an app', function() {
 		this.timeout(120 * 1000);
 		var token, project = __dirname + '/fixtures/simple-app';
