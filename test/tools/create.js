@@ -3,7 +3,7 @@
 var shellpromise = require('shellpromise');
 
 module.exports = function(name) {
-	return shellpromise('heroku apps:create ' + (name ? '--app ' + name : '') + ' --org financial-times --no-remote', { verbose: true })
+	return shellpromise('heroku apps:create ' + (name ? '--app ' + name : '') + ' --org financial-times --no-remote 2> /dev/null', { verbose: true })
 		.then(function(name) {
 			var match = name.match(/^Creating ([a-z-0-9]+) /);
 			if (match[1]) {
